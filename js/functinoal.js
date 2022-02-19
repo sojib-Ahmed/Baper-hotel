@@ -19,13 +19,11 @@ function updateBalance(amount, isAdd) {
     const previousBalance = parseFloat(balanceInText);
     let newBalance;
     if (isAdd==true){
-        newBalance=previousBalance+amount;
-        
+        newBalance=previousBalance+amount;   
     }
     else{
         newBalance=previousBalance-amount;
     }
-    
     balanceTag.innerText=newBalance;
 }
 document.getElementById('deposit-button').addEventListener('click',
@@ -33,15 +31,19 @@ document.getElementById('deposit-button').addEventListener('click',
         // console.log('depositClick')
         const amount = getInputValue('deposit-input');
         // console.log(amount);
+       if (amount>0){
         updateTotal('deposit-total', amount);
-        updateBalance(amount, true)
-    })
+        updateBalance(amount, true);
+       }
+    });
 
 // ei bar Withdraw er pala
 document.getElementById('withdraw-button').addEventListener('click', function () {
     // console.log('withdraw-button chacking')
     const amount = getInputValue('withdraw-input');
     // console.log(amount);
-    updateTotal('withdraw-total', amount);
+    if (amount>0){
+        updateTotal('withdraw-total', amount);
     updateBalance(amount, false);
+    }
 })
